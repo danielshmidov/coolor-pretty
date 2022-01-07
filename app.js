@@ -16,10 +16,23 @@ function randomColors() {
   colorDivs.forEach((div, index) => {
     const hexText = div.children[0];
     const randomColor = generateHex();
+    console.log(hexText);
 
     div.style.backgroundColor = randomColor;
     hexText.innerText = randomColor;
+    //check for luminence
+    checkTextContrast(randomColor, hexText);
   });
+}
+
+function checkTextContrast (color, text) {
+  const lumin = chroma(color).luminance();
+
+  if (lumin > 0.5) {
+    text.style.color = "black";
+  } else {
+    text.style.color = "white";
+  }
 }
 
 randomColors();
